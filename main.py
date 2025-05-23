@@ -87,6 +87,23 @@ class TriangleAnalyzer:
             print("Баг 1: Поле C не проверяется — найден.")
             self.bug_detected += 1
 
+        # Равносторонний треугольник с нулями
+        if a == '0' and b == '0' and c == '0':
+            print("Баг 2: Равносторонний треугольник с нулевыми сторонами — найден.")
+            self.bug_detected += 1
+
+        # Не целые числа
+        try:
+            if '.' in str(a) or '.' in str(b) or '.' in str(c):
+                print("Баг 3: Не целые числа — найден.")
+                self.bug_detected += 1
+        except ValueError:
+            pass
+
+        # XSS с регистрозависимостью
+        if '<SCRIPT>' in str(a) or '<SCRIPT>' in str(b) or '<SCRIPT>' in str(c):
+            print("Баг 4: XSS с регистрозависимостью — найден.")
+            self.bug_detected += 1
 
     def run_tests(self, a, b, c):
         self.test_cases(a, b, c)
